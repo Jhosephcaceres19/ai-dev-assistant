@@ -1,0 +1,6 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+
+  // Modelo principal del proyecto
+    "model": "opencode/glm-5.3-flash-free"
+}
