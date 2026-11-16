@@ -18,6 +18,7 @@ server.registerTool(
       nombre: z.string().min(1).describe("Nombre del desarrollador"),
     }),
   },
+  
   async ({ nombre }) => {
     return {
       content: [
@@ -29,6 +30,57 @@ server.registerTool(
     };
   }
 );
+
+server.registerTool(
+    "obtener_fecha_hora",
+    {
+        description: "Obtener la fecha y hora actuales de Bolivia",
+        inputSchema: z.object({}),
+    },
+    async()=>{
+        const fechaHora = new Intl.DateTimeFormat("es-BO",{
+            dateStyle: "full",
+            timeStyle: "long",
+            timeZone: "America/La_Paz",
+        }).format(new Date());
+
+        return{
+            content: [
+                {
+                    type: "text",
+                    text: `La fecha y hora actuales son: ${fechaHora}`
+                }
+            ]
+        }
+    }
+);
+server.registerTool(
+    "analizar_texto",
+    {
+        description: "Obtener texto y analizarlo",
+        inputSchema: z.object({
+            texto: z.string().min(1)
+        })
+    },
+    async ({texto}) => {
+        const caracteres = texto.length;
+        const textoLimpio = texto.trim();
+        const palabras = textoLimpio === "" ? 0 : textoLimpio.split(/\s+/).length;
+        const mayuscula = texto.toUpperCase();
+
+        return{
+            content: [
+                {
+                    type: "text",
+                    text: `Analisis del texto:
+                    Caracteres: ${caracteres}
+                    Palabras: ${palabras}
+                    Mayuscula: ${mayuscula}`
+                }
+            ]
+        }
+    }
+)
 
 // 3. Iniciar el servidor mediante stdio
 serveStdio(() => server);

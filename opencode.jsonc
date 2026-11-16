@@ -8,7 +8,8 @@
     "ai-dev-assistant": {
       "type": "local",
       "command": ["bun", "run", "mcp-server/src/index.ts"],
-      "enabled": true
+      "enabled": true,
+      //"codemode": false
     }
   }
 }
