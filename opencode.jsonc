@@ -2,5 +2,13 @@
     "$schema": "https://opencode.ai/config.json",
 
   // Modelo principal del proyecto
-    "model": "opencode/glm-5.3-flash-free"
+    "model": "opencode/glm-5.3-flash-free",
+
+    "mcp": {
+    "ai-dev-assistant": {
+      "type": "local",
+      "command": ["bun", "run", "mcp-server/src/index.ts"],
+      "enabled": true
+    }
+  }
 }
